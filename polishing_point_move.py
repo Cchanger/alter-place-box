@@ -246,7 +246,7 @@ def delete_gazebo_models():
     	#--------------
     	rospy.sleep(1)
 
-    def polish(self)：
+    def polish0(self)：
     	# retrieve current pose from endpoint
     	current_pose = self._limb.endpoint_pose()
     	ik_pose = Pose()
@@ -261,6 +261,8 @@ def delete_gazebo_models():
     	# servo up from current pose
     	self._guarded_move_to_joint_position(joint_angles)
 
+    def polish1(self,pose):
+        self.polish0()
 
 #----------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------
@@ -358,7 +360,7 @@ def main():
         #print("\nPlacing...")
     idx = (idx+1) % len(block_poses)
         #pnp.place(block_poses[idx])
-    pnp.self.polish
+    pnp.polish1
     return 0
 
 if __name__ == '__main__':
