@@ -236,30 +236,30 @@ def delete_gazebo_models():
 #----------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------
 
-def touch_desk(self,pose):
-    self._approach(pose)
-    # servo to pose
-    self._servo_to_pose(pose)
-    #-------------
-    # close gripper
-    self.gripper_close()
-    #--------------
-    rospy.sleep(1)
+    def touch_desk(self,pose):
+    	self._approach(pose)
+    	# servo to pose
+    	self._servo_to_pose(pose)
+    	#-------------
+    	# close gripper
+    	self.gripper_close()
+    	#--------------
+    	rospy.sleep(1)
 
-def polish(self)：
-    # retrieve current pose from endpoint
-    current_pose = self._limb.endpoint_pose()
-    ik_pose = Pose()
-    ik_pose.position.x = current_pose['position'].x 
-    ik_pose.position.y = current_pose['position'].y -0.2
-    ik_pose.position.z = current_pose['position'].z 
-    ik_pose.orientation.x = current_pose['orientation'].x 
-    ik_pose.orientation.y = current_pose['orientation'].y 
-    ik_pose.orientation.z = current_pose['orientation'].z 
-    ik_pose.orientation.w = current_pose['orientation'].w
-    joint_angles = self.ik_request(ik_pose)
-    # servo up from current pose
-    self._guarded_move_to_joint_position(joint_angles)
+    def polish(self)：
+    	# retrieve current pose from endpoint
+    	current_pose = self._limb.endpoint_pose()
+    	ik_pose = Pose()
+    	ik_pose.position.x = current_pose['position'].x 
+    	ik_pose.position.y = current_pose['position'].y -0.2
+    	ik_pose.position.z = current_pose['position'].z 
+    	ik_pose.orientation.x = current_pose['orientation'].x 
+    	ik_pose.orientation.y = current_pose['orientation'].y 
+    	ik_pose.orientation.z = current_pose['orientation'].z 
+    	ik_pose.orientation.w = current_pose['orientation'].w
+    	joint_angles = self.ik_request(ik_pose)
+    	# servo up from current pose
+    	self._guarded_move_to_joint_position(joint_angles)
 
 
 #----------------------------------------------------------------------------------
@@ -351,14 +351,14 @@ def main():
     # Move to the desired starting angles
     pnp.move_to_start(starting_joint_angles)                 #-------------首先移动到初始化的关节角处
     idx = 0
-    while not rospy.is_shutdown():
+    #while not rospy.is_shutdown():
         #print("\nPicking...")
         #pnp.pick(block_poses[idx])
-	pnp.touch_desk(block_poses[idx])
+    pnp.touch_desk(block_poses[idx])
         #print("\nPlacing...")
-        idx = (idx+1) % len(block_poses)
+    idx = (idx+1) % len(block_poses)
         #pnp.place(block_poses[idx])
-	pnp.polish(self)
+    pnp.self.polish
     return 0
 
 if __name__ == '__main__':
